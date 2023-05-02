@@ -1,3 +1,4 @@
+/* making flex main for orientation of div and elements */
 main {
   display: flex;
   flex-wrap: wrap;
@@ -11,6 +12,7 @@ main .movieContent {
   border-radius: 15px;
   width: 250px;
 }
+/* img view on each div */
 main .movieContent img {
   min-width: 250px;
   min-height: 200px;
@@ -19,12 +21,14 @@ main .movieContent img {
   background-size: cover;
   background-color: #CDCBCB;
 }
+/* button designs */
 main .movieContent .buttonClass {
   height: 50px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
+/* download button styling */
 main .movieContent .buttonClass .download {
   width: 75%;
   padding: 10px 10px;
@@ -48,6 +52,7 @@ body::-webkit-scrollbar, main::-webkit-scrollbar {
   display: none;
 }
 
+/* like and dislike buttons styling continuing with hovering effect */
 .like, .dislike, .dislikeFav {
   min-width: -moz-fit-content;
   min-width: fit-content;

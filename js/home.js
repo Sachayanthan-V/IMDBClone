@@ -1,4 +1,4 @@
-var myfav = [
+var myfav = [ // to keep favorite list
     {
         id : "default1",
         name : "Avengers: Age of Ultron",
@@ -12,11 +12,11 @@ var myfav = [
 ];
 
 let idholder = [];
-let subIdHolder = [];
 
+// to handle click events on selecting a movie to show in full description of the specific movie
 function handleDivClick(link){
     console.log("Entered");
-    let anchorValue = $(`#${link}`);
+    let anchorValue = $(`#${link}`); // same as document.getElementByID(`${link}`)
     let currAnchor = anchorValue[0];
 
     let varname = currAnchor.attributes.name.value;
@@ -37,9 +37,9 @@ function handleDivClick(link){
     roothome.setAttribute('style', "display:none");
 }
 
+// to make event for sensing a division
 function activeSenseOfDiv(){
 
-    // let movieArray = $('.movieContent');
     let movieArray = document.getElementsByClassName('movieContentImg');
     console.log("Array ",movieArray);
     for ( let divindex = 0; divindex < movieArray.length; divindex ++ ){
@@ -54,9 +54,7 @@ function activeSenseOfDiv(){
 
 }
 
-// DISLIKE-tt0069576-s
-// 
-
+// make events for dislike buttons on fav page on first load
 async function activateDislike ( id ) {
 
     console.log(id);
@@ -85,7 +83,7 @@ async function activateDislike ( id ) {
 
 }
 
-
+// to make events listeners on like and dislike buttons on home page divisions
 async function activateLike () {
 
     for ( let i=0; i<idholder.length; i++){
@@ -100,6 +98,7 @@ async function activateLike () {
         console.log(dislikeElement);
         console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
     
+        // obj to use to store a fav list and enabling a like event
         likeElement.onclick = await function(){
 
             let obj = {
@@ -108,14 +107,16 @@ async function activateLike () {
                 imgUrl : idholder[i].imgUrl 
             }
 
-            myfav.push(obj);
+            myfav.push(obj); // push to favorite
             favPage();
-            likeElement.setAttribute("style", "display:none");
-            dislikeElement.setAttribute("style", "display:block");
+            likeElement.setAttribute("style", "display:none"); // styling events while clicking 
+            dislikeElement.setAttribute("style", "display:block"); // styling events while clicking 
             console.log(myfav)
-            activateDislike(id);
+            activateDislike(id); 
 
         };
+
+        // enabling a dislike button event
 
         dislikeElement.onclick = await function(){  
             console.log(dislikeElement); 
@@ -128,8 +129,8 @@ async function activateLike () {
             }
 
             favPage();
-            dislikeElement.setAttribute("style", "display:none"); 
-            likeElement.setAttribute("style", "display:block"); 
+            dislikeElement.setAttribute("style", "display:none"); // styling events while clicking 
+            likeElement.setAttribute("style", "display:block"); // styling events while clicking 
         };
     
         
@@ -138,6 +139,7 @@ async function activateLike () {
 
 }
 
+// making all dislike buttons activation which are all elements present in favorite list
 function makedislikeusingmyfavArray(){
     for ( let i=0; i<myfav.length; i++ ) {
         let dislikeElement = document.getElementById(`DISLIKE-${myfav[i].id}-s`);
@@ -162,6 +164,7 @@ function makedislikeusingmyfavArray(){
     }
 }
 
+// on search bar change event listening for make a api call and add those elements with the rendered value on home page
 async function onSearchChange(){
     let root = document.getElementById('root');    
     let searchValue = `http://www.omdbapi.com/?apikey=6b786f7b&s=avengers`;
@@ -170,7 +173,7 @@ async function onSearchChange(){
     idholder = []
     if (root){
         console.log(searchInput.value);
-        $("#root").empty();
+        $("#root").empty(); // // same as document.getElementByID('root') with delete child nodes.
 
             if (searchInput){
                 searchValue = `http://www.omdbapi.com/?apikey=6b786f7b&s=${searchInput.value}`;
@@ -259,10 +262,11 @@ async function onSearchChange(){
     }
 }
 
+// fav page load with elements with their values using my fav list
 function favPage () {
 
 
-    $('#favRoot').empty();
+    $('#favRoot').empty(); // same as document.getElementByID('favroot')
     // makedislikeusingmyfavArray();
     console.log("Entered Fav page");
     let favRoot = document.getElementById('favRoot');
@@ -301,9 +305,11 @@ function favPage () {
     }
 }
 
+// on page load
 favPage();
 activeSenseOfDiv();
 
+// activating favorite and home button on header and its styling events
 let favbtn  = document.getElementById('favbtn');
 let homebtn = document.getElementById('homebtn');
 let rootfav = document.getElementById('favRoot');
@@ -327,15 +333,17 @@ homebtn.onclick = function(){
     roothome.setAttribute('style', "display:flex");
 }
 
+// event on search input while typing to call a api on each key down event
 let searchSubmitBtn = document.getElementById('searchSubmitBtn');
 searchSubmitBtn.onclick = function(){
     let searchInput = document.getElementById('searchInput');
     if (searchInput){
-        $('#root').empty();
+        $('#root').empty(); // same as document.getElementByID('root')
         onSearchChange();
     }
 }
 
+// activating a dislike events for default list and styling
 let default1Div = document.getElementById(`default1`);
 let default1Btn = document.getElementById(`DISLIKE-default1-s`);
 let default2Div = document.getElementById(`default2`);
@@ -359,4 +367,10 @@ default2Btn.onclick = function(){
             break;
         }
     }
+}
+
+// search input auto event listening while key press on searching any movie
+let searchInputHeader = document.getElementById('searchInput');
+searchInputHeader.onkeydown = function(){
+    onSearchChange();
 }

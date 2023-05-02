@@ -6,12 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IMBD Home</title>
+    <!-- linking all styling pages -->
     <link rel="stylesheet" href="./css/home.css">
     <link rel="stylesheet" href="./../css/favorite.css">
     <link rel="stylesheet" href="./css/header.css">
     <link rel="stylesheet" href="./css/movie.css">
 
-    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-2c7831bb44f98c1391d6a4ffda0e1fd302503391ca806e7fcc7b9b87197aec26.js"></script>
+    <!-- linking a jquery library just for learning purpose -->
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
     
 
@@ -19,6 +20,7 @@
 <body>
     
 
+    <!-- header division  -->
     <header>
         <div class="">
             <h2>OMDB MOVIES</h2>
@@ -32,33 +34,20 @@
         </div>
     </header>
 
+    <!-- for home page -->
     <main id="root">
-
-        <!-- <div class="movieContent" value="hiddenanchor1">
-            <img class="movieContentImg" value="hiddenanchor1"   src="" alt="">
-            <h3 class="MovieName"> movie </h3>
-            <div class="buttonClass">
-                <button class="download">Download</button>
-                <button class="like" id="like032456" >Like</button>
-                <button class="dislike" id="dislike032456" >Dislike</button>
-            </div>
-            <a 
-                id="hiddenanchor1"
-                href="./html/movie.html"
-                year="2012"
-                name="Avengers: Age of Ultron"
-                imgUrl="https://m.media-amazon.com/images/M/MV5BMTM4OGJmNWMtOTM4Ni00NTE3LTg3MDItZmQxYjc4N2JhNmUxXkEyXkFqcGdeQXVyNTgzMDMzMTg@._V1_SX300.jpg"            
-            ></a>
-        </div> -->
 
     </main>
 
+    <!-- for favorite page -->
     <main id="favRoot">
 
     </main>
 
+    <!-- for specific movie page -->
     <main id="movieRoot">
 
+        <!-- single layout for movie root and elements designs -->
         <div id="top">
             <img id="movieImgUrl" src="" alt="">
             <div id="MovieContent">
@@ -73,7 +62,6 @@
                 </div>
                 <div id="buttonholder">
                     <button>Download</button>
-                    <a href="">Dislike</a>
                 </div>
                 <div id="space"></div>
             </div>
@@ -83,6 +71,7 @@
 
 </body>
 
+    <!-- linking a main script -->
     <script src="./js/home.js"></script>
 
 </html>
