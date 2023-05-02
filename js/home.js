@@ -176,7 +176,7 @@ async function onSearchChange(){
         $("#root").empty(); // // same as document.getElementByID('root') with delete child nodes.
 
             if (searchInput){
-                searchValue = `http://www.omdbapi.com/?apikey=6b786f7b&s=${searchInput.value}`;
+                searchValue = `https://www.omdbapi.com/?apikey=6b786f7b&s=${searchInput.value}`;
             }
             let request = new XMLHttpRequest();
             let movie;
