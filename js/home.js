@@ -54,39 +54,34 @@ function activeSenseOfDiv(){
 
 }
 
-async function activateDislike () {
+// DISLIKE-tt0069576-s
+// 
 
-    for ( let i=0; i<subIdHolder.length; i++){
+async function activateDislike ( id ) {
 
+    console.log(id);
+    let dislikeElement = await document.getElementById(`DISLIKE-${id}-s`);
+    let dislikeDiv = await document.getElementById(`${id}`);
 
-        // let divID = i.splice(0,8);
-        console.log(subIdHolder[i]);
-        let dislikeElement = await document.getElementById(`DISLIKE-${subIdHolder[i]}`);
-        let dislikeDiv = await document.getElementById(`${subIdHolder[i]}`);
+    console.log("DISLIKE ELEMENT : " , dislikeElement);
+    console.log("DISLIKE DIV : " , dislikeDiv);
 
-        console.log(dislikeElement);
-        console.log(dislikeDiv);
+    // document.getElementById(`DISLIKE-${id}-s`).onclick = await function(){  
+    dislikeElement.onclick = function(){  
+        console.log(dislikeElement); 
 
-        // let dislikeElement = await document.getElementById(i);
-
-        dislikeElement.onclick = await function(){  
-            console.log(dislikeElement); 
-
-            for (let i=0; i<myfav.length; i++) {
-                if (myfav[i].id==id){
-                    myfav.splice(i, 1);
-                    break;
-                }
+        console.log("BEFORE MY FAV : ", myfav);
+        for (let i=0; i<myfav.length; i++) {
+            if (myfav[i].id== id){
+                myfav.splice(i, 1);
+                break;
             }
-
-            subIdHolder.remove(subIdHolder[i]);
-            dislikeDiv.setAttribute("style", "display:none"); 
-            favPage();
-        };
-    
-        
-
-    }
+        }
+        console.log("AFTER MY FAV : ", myfav);
+        favPage();
+        dislikeElement.setAttribute("style", "display:none"); 
+        likeElement.setAttribute("style", "display:block"); 
+    };
 
 }
 
@@ -113,14 +108,12 @@ async function activateLike () {
                 imgUrl : idholder[i].imgUrl 
             }
 
-            subIdHolder.push(id);
-            activateDislike();
-
             myfav.push(obj);
             favPage();
             likeElement.setAttribute("style", "display:none");
             dislikeElement.setAttribute("style", "display:block");
             console.log(myfav)
+            activateDislike(id);
 
         };
 
@@ -143,6 +136,30 @@ async function activateLike () {
 
     }
 
+}
+
+function makedislikeusingmyfavArray(){
+    for ( let i=0; i<myfav.length; i++ ) {
+        let dislikeElement = document.getElementById(`DISLIKE-${myfav[i].id}-s`);
+        let id = myfav[i].id;
+        dislikeElement.onclick = function(){  
+            console.log(dislikeElement); 
+    
+            console.log("BEFORE MY FAV : ", myfav);
+            for (let i=0; i<myfav.length; i++) {
+                if (myfav[i].id== id){
+                    myfav.splice(i, 1);
+                    break;
+                }
+            }
+            console.log("AFTER MY FAV : ", myfav);
+            favPage();
+            let dislikeElementMain = document.getElementById(`DISLIKE-${id}`);
+            let likeElementMain = document.getElementById(`LIKE-${id}`);
+            dislikeElementMain.setAttribute("style", "display:none"); 
+            likeElementMain.setAttribute("style", "display:block"); 
+        };
+    }
 }
 
 async function onSearchChange(){
@@ -246,7 +263,7 @@ function favPage () {
 
 
     $('#favRoot').empty();
-
+    // makedislikeusingmyfavArray();
     console.log("Entered Fav page");
     let favRoot = document.getElementById('favRoot');
     if (favRoot) {
@@ -262,7 +279,7 @@ function favPage () {
             buttonDownload.textContent = "Download";
             const dislikebtn = document.createElement('button');
             dislikebtn.classList.add("dislikeFav");
-            dislikebtn.setAttribute('id', `DISLIKE-${myfav[i].id}`);
+            dislikebtn.setAttribute('id', `DISLIKE-${myfav[i].id}-s`);
             dislikebtn.textContent = "Dislike";
             const movieName = document.createElement('h3');
             movieName.classList.add('MovieName');
@@ -280,6 +297,7 @@ function favPage () {
             root.appendChild(movieDiv);
             
         }
+        makedislikeusingmyfavArray();
     }
 }
 
@@ -315,5 +333,30 @@ searchSubmitBtn.onclick = function(){
     if (searchInput){
         $('#root').empty();
         onSearchChange();
+    }
+}
+
+let default1Div = document.getElementById(`default1`);
+let default1Btn = document.getElementById(`DISLIKE-default1-s`);
+let default2Div = document.getElementById(`default2`);
+let default2Btn = document.getElementById(`DISLIKE-default2-s`);
+
+default1Btn.onclick = function(){
+    default1Div.setAttribute('style', "display:none !important");
+    for (let i=0; i<myfav.length; i++) {
+        if(myfav[i].id == "default1"){
+            myfav.splice(i,1);
+            break;
+        }
+    }
+}
+
+default2Btn.onclick = function(){
+    default2Div.setAttribute('style', "display:none !important");
+    for (let i=0; i<myfav.length; i++) {
+        if(myfav[i].id == "default2"){
+            myfav.splice(i,1);
+            break;
+        }
     }
 }
